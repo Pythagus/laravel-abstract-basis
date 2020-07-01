@@ -32,18 +32,18 @@ abstract class AbstractPolicy {
      *
      * @var bool
      */
-    private static $enabled = false ;
+    protected static $enabled = false ;
 
     /**
      * @var Closure
      */
-    private static $callback ;
+    protected static $callback ;
 
     /**
-     * @param $user
+     * @param null|mixed $user
      * @return bool|null
      */
-    public function before($user) {
+    public function before($user = null) {
         if(boolval($this->forced) || ! $this->isEnabled() || ! $this->hasCallback()) {
             return null ;
         }
@@ -60,11 +60,11 @@ abstract class AbstractPolicy {
      * @return bool
      */
     private function isEnabled() {
-        if(is_null(self::$enabled)) {
+        if(is_null(static::$enabled)) {
             return true ;
         }
 
-        return boolval(self::$enabled) ;
+        return boolval(static::$enabled) ;
     }
 
     /**
@@ -73,7 +73,7 @@ abstract class AbstractPolicy {
      * @return bool
      */
     private function hasCallback() {
-        return ! is_null(self::$callback) ;
+        return ! is_null(static::$callback) ;
     }
 
     /**
@@ -83,7 +83,7 @@ abstract class AbstractPolicy {
      * @param bool $bool
      */
     public static function setEnable(bool $bool = null) {
-        self::$enabled = $bool ;
+        static::$enabled = $bool ;
     }
 
     /**
@@ -93,7 +93,7 @@ abstract class AbstractPolicy {
      * @param Closure $callback
      */
     public static function setCallback(Closure $callback) {
-        self::$callback = $callback ;
+        static::$callback = $callback ;
     }
 
 }

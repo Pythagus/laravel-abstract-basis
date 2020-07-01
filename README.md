@@ -28,6 +28,7 @@ AbstractPolicy::setCallback(function($user) {
     return $user->isSuperUser() ;
 });
 ```
+*Warning note:* the ```$user``` parameter can be null.
 
 The **forced** attribute allows you to disable the system in specific policies, like:
 ```php
