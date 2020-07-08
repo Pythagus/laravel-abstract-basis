@@ -90,7 +90,7 @@ trait TryMethod {
         }, function(Throwable $throwable) {
             $text = $this->getThrowableMessage($throwable) ;
 
-            return response()->json(compact('text'), 300) ;
+            return response()->json(compact('text'), 500) ;
         }) ;
     }
 
