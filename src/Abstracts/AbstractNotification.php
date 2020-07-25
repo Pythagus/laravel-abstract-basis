@@ -5,6 +5,7 @@ namespace Pythagus\LaravelAbstractBasis\Abstracts;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 
 /**
  * Class AbstractNotification
@@ -34,6 +35,15 @@ abstract class AbstractNotification extends Notification implements ShouldQueue 
      */
     public function toArray($notifiable) {
         return [] ;
+    }
+
+    /**
+     * Make a new instance of MailMessage.
+     *
+     * @return MailMessage
+     */
+    public function make() {
+        return new MailMessage() ;
     }
 
 }
