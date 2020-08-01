@@ -24,4 +24,15 @@ abstract class AbstractResource extends JsonResource {
         ) ;
 	}
 
+    /**
+     * Get the resource as an array.
+     *
+     * @param $resource
+     * @param null $request
+     * @return array
+     */
+    public static function array($resource, $request = null) {
+        return static::collection($resource)->toArray($request) ;
+    }
+
 }
