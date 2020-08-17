@@ -18,5 +18,12 @@
         "psr-4": {
             "Pythagus\\LaravelAbstractBasis\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pythagus\\LaravelAbstractBasis\\AbstractBasisServiceProvider"
+            ]
+        }
     }
 }
