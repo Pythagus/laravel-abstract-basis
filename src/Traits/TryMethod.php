@@ -4,7 +4,6 @@ namespace Pythagus\LaravelAbstractBasis\Traits;
 
 use Throwable;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Pythagus\LaravelAbstractBasis\MyException;
 
 /**
@@ -22,7 +21,7 @@ trait TryMethod {
      *
      * @param callable $inner
      * @param callable|null $out
-     * @return RedirectResponse|JsonResponse
+     * @return mixed
      */
     protected function try(callable $inner, callable $out = null) {
         try {
