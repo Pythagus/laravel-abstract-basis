@@ -44,6 +44,26 @@ If the system is enabled and you defined a callback, then the callback will be e
 The other abstract objects are only a merge of the repetitive things in the generated Laravel files: ```AbstractController```, ```AbstractEvent```, ```AbstractListener```, ```AbstractRepository```, ```AbstractMail```, ```AbstractNotification```.
 Please, check the files to know what they implement. 
 
+##### Configurations
+You can configure the ```php artisan module:link``` by defining in your ```config/app.php``` file:
+```php
+/*
+|--------------------------------------------------------------------------
+| Abstract Basis module
+|--------------------------------------------------------------------------
+|
+| This array contains the whole external modules needing a symbolic link in 
+| the public folder.
+| The key will be the link name.
+| The value is the path to the targetted file/folder from the vendor folder.
+|
+*/
+'modules' => [
+    'bootstrap' => 'twbs/bootstrap',
+],
+```
+The key will be the link name and the value is the path to the targetted file/folder from the ```vendor``` folder.
+
 ## Traits
 This package includes some traits to help you managing your Laravel project.
 

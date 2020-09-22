@@ -3,6 +3,7 @@
 namespace Pythagus\LaravelAbstractBasis;
 
 use Illuminate\Support\ServiceProvider;
+use Pythagus\LaravelAbstractBasis\Commands\ModuleLinkCommand;
 use Pythagus\LaravelAbstractBasis\Commands\GenerateJsCommand;
 use Pythagus\LaravelAbstractBasis\Commands\GenerateCssCommand;
 use Pythagus\LaravelAbstractBasis\Commands\GenerateViewCommand;
@@ -26,6 +27,7 @@ class AbstractBasisServiceProvider extends ServiceProvider {
 		GenerateViewCommand::class,
 		GenerateCssCommand::class,
 		GenerateJsCommand::class,
+		ModuleLinkCommand::class,
 	] ;
 
 	/**
