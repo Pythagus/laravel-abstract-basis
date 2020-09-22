@@ -3,6 +3,7 @@
 namespace Pythagus\LaravelAbstractBasis;
 
 use Illuminate\Support\ServiceProvider;
+use Pythagus\LaravelAbstractBasis\Commands\GenerateViewCommand;
 use Pythagus\LaravelAbstractBasis\Commands\GenerateRepositoryCommand;
 
 /**
@@ -15,20 +16,21 @@ use Pythagus\LaravelAbstractBasis\Commands\GenerateRepositoryCommand;
  */
 class AbstractBasisServiceProvider extends ServiceProvider {
 
-    /**
-     * @var array
-     */
-    protected $commands = [
-        GenerateRepositoryCommand::class,
-    ] ;
+	/**
+	 * @var array
+	 */
+	protected $commands = [
+		GenerateRepositoryCommand::class,
+		GenerateViewCommand::class,
+	] ;
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register() {
-        $this->commands($this->commands) ;
-    }
+	/**
+	 * Register any application services.
+	 *
+	 * @return void
+	 */
+	public function register() {
+		$this->commands($this->commands) ;
+	}
 
 }
