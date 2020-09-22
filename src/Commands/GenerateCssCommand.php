@@ -5,33 +5,33 @@ namespace Pythagus\LaravelAbstractBasis\Commands;
 use Illuminate\Console\GeneratorCommand;
 
 /**
- * Class GenerateViewCommand
+ * Class GenerateCssCommand
  * @package Pythagus\LaravelAbstractBasis\Commands
  *
  * @author: Damien MOLINA
  */
-class GenerateViewCommand extends GeneratorCommand {
+class GenerateCssCommand extends GeneratorCommand {
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:view {name : Path to the view}' ;
+    protected $signature = 'make:css {name : Path to the css file}' ;
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate a new blade file';
+    protected $description = 'Generate a new CSS file';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'View';
+    protected $type = 'CSS';
 
     /**
      * Get the stub file for the generator.
@@ -39,7 +39,7 @@ class GenerateViewCommand extends GeneratorCommand {
      * @return string
      */
     protected function getStub () {
-        return __DIR__ . '/stubs/view.stub';
+        return __DIR__ . '/stubs/css.stub';
     }
 
 	/**
@@ -49,7 +49,7 @@ class GenerateViewCommand extends GeneratorCommand {
 	 * @return string
 	 */
 	protected function getPath($name) {
-		return $this->laravel->resourcePath() . '/views/' . $name.'.blade.php' ;
+		return public_path('css/' . $name.'.css') ;
 	}
 
 	/**
