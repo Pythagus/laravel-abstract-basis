@@ -36,6 +36,16 @@ trait Redirectable {
     }
 
     /**
+     * Redirect back with a warning message
+     *
+     * @param string $msg
+     * @return RedirectResponse
+     */
+    protected function backWarning(string $msg = null) {
+        return $this->redirectWarning($msg)->back() ;
+    }
+
+    /**
      * @param string|null $msg
      * @return Application|RedirectResponse|Redirector
      */
@@ -49,6 +59,14 @@ trait Redirectable {
      */
     protected function redirectError(string $msg = null) {
         return Redirection::make($msg)->error() ;
+    }
+
+    /**
+     * @param string|null $msg
+     * @return Application|RedirectResponse|Redirector
+     */
+    protected function redirectWarning(string $msg = null) {
+        return Redirection::make($msg)->warning() ;
     }
 
 }
