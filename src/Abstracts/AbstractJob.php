@@ -2,25 +2,27 @@
 
 namespace Pythagus\LaravelAbstractBasis\Abstracts;
 
+use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Pythagus\LaravelAbstractBasis\Traits\Container;
 
 /**
- * Class AbstractEvent
+ * Class AbstractJob
  * @package Pythagus\LaravelAbstractBasis\Abstracts
  *
  * @author: Damien MOLINA
  */
-abstract class AbstractEvent {
+abstract class AbstractJob implements ShouldQueue {
 
     /**
      * Laravel default traits.
      *
      * @version 7.12
      */
-    use Dispatchable, InteractsWithSockets, SerializesModels ;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels ;
 
     /**
      * Custom traits.
