@@ -19,8 +19,8 @@ trait ExternalRequest {
 	 * @param bool $assoc
 	 * @return mixed
 	 */
-	protected function externalRequest(string $url, array $param = null, string $headerKey = '', bool $assoc = false) {
-		return json_decode($this->cURL($url, $param, $headerKey), $assoc) ;
+	protected function externalRequest(string $url, array $param = null, string $headerKey = '', bool $assoc = false, string $contentType = 'application/x-www-form-urlencoded') {
+		return json_decode($this->cURL($url, $param, $headerKey, $contentType), $assoc) ;
 	}
 
 	/**
@@ -31,8 +31,8 @@ trait ExternalRequest {
 	 * @param string $headerKey
 	 * @return bool|string
 	 */
-	private function cURL(string $url, array $param = null, string $headerKey = '') {
-		$header = "Content-type: application/x-www-form-urlencoded" ;
+	private function cURL(string $url, array $param = null, string $headerKey = '', string $contentType = 'application/x-www-form-urlencoded') {
+		$header = "Content-type: " . $contentType ;
 
 		if(strlen($headerKey) > 0) {
 			$header .= "\r\n".$headerKey ;
