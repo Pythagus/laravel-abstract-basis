@@ -33,5 +33,25 @@ class AbstractBasisServiceProvider extends ServiceProvider {
 	 */
 	public function register() {
 		$this->commands($this->commands) ;
+
+		$this->publishes(
+	        $this->getStubs(['migration.create']), 'abstract-basis-stubs'
+        ) ;
 	}
+
+	/**
+	 * Get the stubs path.
+	 * 
+     * @param array $names
+     * @return array
+     */
+    private function getStubs(array $names) {
+        $files = [] ;
+
+        foreach($names as $name) {
+            $files[__DIR__.'/stubs/'.$name.'.stub'] = base_path('stubs/'.$name.'.stub') ;
+        }
+
+        return $files ;
+    }
 }
