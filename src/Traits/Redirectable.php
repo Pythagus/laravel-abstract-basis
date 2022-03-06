@@ -2,10 +2,8 @@
 
 namespace Pythagus\LaravelAbstractBasis\Traits;
 
-use Illuminate\Routing\Redirector;
 use Illuminate\Http\RedirectResponse;
 use Pythagus\LaravelAbstractBasis\Redirection;
-use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Trait Redirectable
@@ -16,7 +14,7 @@ use Illuminate\Contracts\Foundation\Application;
 trait Redirectable {
 
     /**
-     * Redirect back with a success message
+     * Redirect back with a success message.
      *
      * @param string $msg
      * @return RedirectResponse
@@ -26,7 +24,7 @@ trait Redirectable {
     }
 
     /**
-     * Redirect back with an error message
+     * Redirect back with an error message.
      *
      * @param string $msg
      * @return RedirectResponse
@@ -36,7 +34,7 @@ trait Redirectable {
     }
 
     /**
-     * Redirect back with a warning message
+     * Redirect back with a warning message.
      *
      * @param string $msg
      * @return RedirectResponse
@@ -46,27 +44,35 @@ trait Redirectable {
     }
 
     /**
+     * Create a redirection instance with the given
+     * success message.
+     * 
      * @param string|null $msg
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
     protected function redirectSuccess(string $msg = null) {
         return Redirection::make($msg)->success() ;
     }
 
     /**
+     * Create a redirection instance with the given
+     * error message.
+     * 
      * @param string|null $msg
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
     protected function redirectError(string $msg = null) {
         return Redirection::make($msg)->error() ;
     }
 
     /**
+     * Create a redirection instance with the given
+     * warning message.
+     * 
      * @param string|null $msg
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
     protected function redirectWarning(string $msg = null) {
         return Redirection::make($msg)->warning() ;
     }
-
 }

@@ -2,9 +2,7 @@
 
 namespace Pythagus\LaravelAbstractBasis;
 
-use Illuminate\Routing\Redirector;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Class Redirection
@@ -42,7 +40,7 @@ class Redirection {
      * Set the type of the alert.
      *
      * @param string $type
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
     private function setType(string $type) {
         if(! is_null($this->text)) {
@@ -55,7 +53,7 @@ class Redirection {
     /**
      * Set the alert as success.
      *
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
     public function success() {
         return $this->setType('success') ;
@@ -64,7 +62,7 @@ class Redirection {
     /**
      * Set the alert as error.
      *
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
     public function error() {
         return $this->setType('error') ;
@@ -73,10 +71,9 @@ class Redirection {
     /**
      * Set the alert as warning.
      *
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
     public function warning() {
         return $this->setType('warning') ;
     }
-
 }
