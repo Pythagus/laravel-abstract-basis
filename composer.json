@@ -7,7 +7,7 @@
     "license": "MIT",
     "authors": [{
         "name": "Damien Molina",
-        "email": "damis01800@gmail.com"
+        "email": "opensource@dmolina.fr"
     }],
     "require": {
         "php": ">=7.0",
