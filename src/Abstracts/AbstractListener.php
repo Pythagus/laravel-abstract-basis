@@ -6,7 +6,7 @@ use Throwable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Pythagus\LaravelAbstractBasis\Traits\Container;
-use Pythagus\LaravelAbstractBasis\Traits\LogException;
+use Pythagus\LaravelAbstractBasis\Traits\TryMethod;
 
 /**
  * Class AbstractListener
@@ -25,8 +25,7 @@ abstract class AbstractListener implements ShouldQueue {
         try {
             $inner() ;
         } catch(Throwable $throwable) {
-            LogException::add($throwable) ;
+            TryMethod::add($throwable) ;
         }
     }
-
 }

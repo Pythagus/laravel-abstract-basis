@@ -57,7 +57,7 @@ trait TryMethod {
      */
     protected function addThrowableInLog(Throwable $throwable) {
         try {
-            LogException::add($throwable) ;
+            TryMethod::logException($throwable) ;
         } catch(Throwable $throwable) {}
     }
 
@@ -93,4 +93,12 @@ trait TryMethod {
         }) ;
     }
 
+    /**
+     * Add a line in the log file.
+     *
+     * @param Throwable $throwable
+     */
+    public static function logException(Throwable $throwable) {
+        // TODO log exception.
+    }
 }
