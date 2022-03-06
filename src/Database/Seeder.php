@@ -48,7 +48,7 @@ abstract class Seeder extends BaseSeeder {
      *
      * @return Builder
      */
-    abstract protected function query() ;
+    abstract public function query() ;
 
     /**
      * Run the database seeds.
