@@ -39,7 +39,7 @@ class GenerateRepositoryCommand extends GeneratorCommand {
      * @return string
      */
     protected function getStub () {
-        return __DIR__ . '/stubs/repository.stub';
+        return __DIR__ . '/../stubs/repository.stub';
     }
 
     /**
@@ -51,5 +51,4 @@ class GenerateRepositoryCommand extends GeneratorCommand {
     protected function getDefaultNamespace($rootNamespace) {
         return $rootNamespace.'\Repositories';
     }
-
 }

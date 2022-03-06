@@ -39,7 +39,7 @@ class GenerateViewCommand extends GeneratorCommand {
      * @return string
      */
     protected function getStub () {
-        return __DIR__ . '/stubs/view.stub';
+        return __DIR__ . '/../stubs/view.stub';
     }
 
 	/**
@@ -61,5 +61,4 @@ class GenerateViewCommand extends GeneratorCommand {
 	protected function qualifyClass($name) {
 		return $name ;
 	}
-
 }

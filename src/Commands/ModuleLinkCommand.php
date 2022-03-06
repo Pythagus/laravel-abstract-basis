@@ -111,5 +111,4 @@ class ModuleLinkCommand extends Command {
 	private function vendorPath(string $module) {
 		return base_path('vendor/'.$module) ;
 	}
-
 }
