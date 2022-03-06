@@ -56,9 +56,7 @@ trait TryMethod {
      * @param Throwable $throwable
      */
     protected function addThrowableInLog(Throwable $throwable) {
-        try {
-            LogException::add($throwable) ;
-        } catch(Throwable $throwable) {}
+        // TODO add in exception center.
     }
 
     /**
@@ -92,5 +90,4 @@ trait TryMethod {
             return response()->json(compact('text'), 500) ;
         }) ;
     }
-
 }
