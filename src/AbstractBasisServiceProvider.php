@@ -35,7 +35,7 @@ class AbstractBasisServiceProvider extends ServiceProvider {
 		$this->commands($this->commands) ;
 
 		$this->publishes(
-	        $this->getStubs(['migration.create']), 'abstract-basis-stubs'
+	        $this->getStubs(['migration.create', 'seeder']), 'abstract-basis-stubs'
         ) ;
 	}
 
