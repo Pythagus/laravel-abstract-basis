@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Pythagus\LaravelAbstractBasis\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use HTMLMin\HTMLMin\Http\Middleware\MinifyMiddleware;
 
 /**
@@ -15,9 +17,9 @@ class MinifyHTML extends MinifyMiddleware {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param  Request $request
+     * @param  Closure $next
+     * @return Response
      */
     public function handle($request, Closure $next) {
         if(app()->environment('production')) {
