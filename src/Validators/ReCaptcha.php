@@ -2,6 +2,7 @@
 
 namespace Pythagus\LaravelAbstractBasis\Validators;
 
+use Exception;
 use Throwable;
 use Pythagus\LaravelAbstractBasis\Traits\ExternalRequest;
 
@@ -23,9 +24,19 @@ class ReCaptcha {
 	 * @return bool
      */
 	public function validate($attribute, $value, $parameters, $validator) {
+		$url = config('app.recaptcha.url') ;
+		if(empty($url)) {
+			throw new Exception("Null ReCaptcha URL") ;
+		}
+
+		$secret = config('app.recaptcha.secret') ;
+		if(empty($secret)) {
+			throw new Exception("Null ReCaptcha secret") ;
+		}
+
 		try {
-			$response = $this->externalRequest(config('app.recaptcha.url'), [
-				'secret'   => config('app.recaptcha.secret'),
+			$response = $this->externalRequest($url, [
+				'secret'   => $secret,
 				'response' => $value
 			]) ;
 
@@ -34,5 +45,4 @@ class ReCaptcha {
 			return false ;
 		}
 	}
-
 }

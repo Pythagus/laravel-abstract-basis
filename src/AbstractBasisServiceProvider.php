@@ -2,8 +2,11 @@
 
 namespace Pythagus\LaravelAbstractBasis;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 use Pythagus\LaravelAbstractBasis\Commands\ModuleLinkCommand;
+use Pythagus\LaravelAbstractBasis\View\Composers\UserComposer;
 use Pythagus\LaravelAbstractBasis\Commands\GenerateViewCommand;
 use Pythagus\LaravelAbstractBasis\Commands\GenerateRepositoryCommand;
 
@@ -25,6 +28,21 @@ class AbstractBasisServiceProvider extends ServiceProvider {
 		GenerateViewCommand::class,
 		ModuleLinkCommand::class,
 	] ;
+
+	/**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+	public function boot() {
+		# Boot the view composers.
+		View::composer('*', UserComposer::class) ;
+
+		# Boot the validators.
+		Validator::extend(
+			'recaptcha', 'Pythagus\\LaravelAbstractBasis\\Validators\\ReCaptcha@validate'
+		) ;
+	}
 
 	/**
 	 * Register any application services.
