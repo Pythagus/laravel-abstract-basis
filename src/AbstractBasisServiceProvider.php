@@ -4,8 +4,6 @@ namespace Pythagus\LaravelAbstractBasis;
 
 use Illuminate\Support\ServiceProvider;
 use Pythagus\LaravelAbstractBasis\Commands\ModuleLinkCommand;
-use Pythagus\LaravelAbstractBasis\Commands\GenerateJsCommand;
-use Pythagus\LaravelAbstractBasis\Commands\GenerateCssCommand;
 use Pythagus\LaravelAbstractBasis\Commands\GenerateViewCommand;
 use Pythagus\LaravelAbstractBasis\Commands\GenerateRepositoryCommand;
 
@@ -25,8 +23,6 @@ class AbstractBasisServiceProvider extends ServiceProvider {
 	protected $commands = [
 		GenerateRepositoryCommand::class,
 		GenerateViewCommand::class,
-		GenerateCssCommand::class,
-		GenerateJsCommand::class,
 		ModuleLinkCommand::class,
 	] ;
 
