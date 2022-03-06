@@ -41,6 +41,16 @@ abstract class Migration extends BaseMigration {
 	abstract public function structure(Blueprint $table) ;
 
 	/**
+	 * Get the table name from another way, like
+	 * from the config folder.
+	 *
+	 * @return string|null
+	 */
+	protected function tableName() {
+		return null ;
+	}
+
+	/**
 	 * Reverse the migrations.
 	 *
 	 * @return void
@@ -79,6 +89,11 @@ abstract class Migration extends BaseMigration {
 
 		if(! empty($this->table)) {
 			return $this->table ;
+		}
+
+		$name = $this->tableName() ;
+		if(! empty($name)) {
+			return $name ;
 		}
 
 		throw new Exception("Undefined class in " . static::class . " migration.") ;
