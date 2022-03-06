@@ -3,6 +3,7 @@
 namespace Pythagus\LaravelAbstractBasis\Abstracts;
 
 use Closure;
+use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Pythagus\LaravelAbstractBasis\Traits\Container;
@@ -32,6 +33,19 @@ abstract class AbstractController extends Controller {
     use Container, TryMethod ;
 
     /**
+     * Get the current logged in user as
+     * a User instance.
+     *
+     * @return User
+     */
+    public function user() {
+        /** @var User $user */
+        $user = auth()->user() ;
+
+        return $user ;
+    }
+
+    /**
      * Authorize the middleware with the given closure.
      * The closure should throw an exception.
      *
@@ -45,5 +59,4 @@ abstract class AbstractController extends Controller {
             return $next($request) ;
         }) ;
     }
-
 }
