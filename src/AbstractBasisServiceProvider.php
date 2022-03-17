@@ -35,13 +35,19 @@ class AbstractBasisServiceProvider extends ServiceProvider {
      * @return void
      */
 	public function boot() {
-		# Boot the view composers.
+		// Boot the view composers.
 		View::composer('*', UserComposer::class) ;
 
-		# Boot the validators.
+		// Boot the validators.
 		Validator::extend(
 			'recaptcha', 'Pythagus\\LaravelAbstractBasis\\Validators\\ReCaptcha@validate'
 		) ;
+
+		// Publish the views.
+		$this->loadViewsFrom(__DIR__ . '/views', 'abstract-basis') ;
+        $this->publishes([
+            __DIR__ . '/views' => base_path('resources/views/vendor/abstract-basis')
+        ]) ;
 	}
 
 	/**
