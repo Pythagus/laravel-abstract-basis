@@ -25,7 +25,7 @@ abstract class AbstractListener implements ShouldQueue {
         try {
             $inner() ;
         } catch(Throwable $throwable) {
-            TryMethod::add($throwable) ;
+            TryMethod::addThrowableInLog($throwable) ;
         }
     }
 }

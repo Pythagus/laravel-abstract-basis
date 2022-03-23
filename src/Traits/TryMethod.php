@@ -40,6 +40,22 @@ trait TryMethod {
     }
 
     /**
+     * Try an Ajax call.
+     * 
+     * @param callable $inner
+     * @return JsonResponse
+     */
+    protected function ajax(callable $inner) {
+        return $this->try(function() use ($inner) {
+            return response()->json($inner()) ;
+        }, function(Throwable $throwable) {
+            $text = $this->getThrowableMessage($throwable);
+
+            return response()->json(compact('text'), 500) ;
+        }) ;
+    }
+
+    /**
      * Get the message of the throwable regarding its
      * instance.
      *
@@ -53,11 +69,13 @@ trait TryMethod {
     }
 
     /**
+     * Log the incoming throwable.
+     * 
      * @param Throwable $throwable
      */
-    protected function addThrowableInLog(Throwable $throwable) {
+    public static function addThrowableInLog(Throwable $throwable) {
         try {
-            TryMethod::logException($throwable) ;
+            report($throwable) ;
         } catch(Throwable $throwable) {}
     }
 
@@ -75,30 +93,5 @@ trait TryMethod {
      */
     protected function weirdExceptionMessage(Throwable $throwable) {
         return "An error occurred" ;
-    }
-
-    /**
-     * @param callable $inner
-     * @return JsonResponse
-     */
-    protected function ajax(callable $inner) {
-        return $this->try(function() use ($inner) {
-            $data = $inner() ;
-
-            return response()->json($data) ;
-        }, function(Throwable $throwable) {
-            $text = $this->getThrowableMessage($throwable) ;
-
-            return response()->json(compact('text'), 500) ;
-        }) ;
-    }
-
-    /**
-     * Add a line in the log file.
-     *
-     * @param Throwable $throwable
-     */
-    public static function logException(Throwable $throwable) {
-        // TODO log exception.
     }
 }
