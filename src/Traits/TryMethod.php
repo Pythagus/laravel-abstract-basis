@@ -4,7 +4,7 @@ namespace Pythagus\LaravelAbstractBasis\Traits;
 
 use Throwable;
 use Illuminate\Http\JsonResponse;
-use Pythagus\LaravelAbstractBasis\MyException;
+use Pythagus\LaravelAbstractBasis\Contracts\KnownException;
 
 /**
  * Trait TryMethod
@@ -73,10 +73,8 @@ trait TryMethod {
      * 
      * @param Throwable $throwable
      */
-    public static function addThrowableInLog(Throwable $throwable) {
-        try {
-            report($throwable) ;
-        } catch(Throwable $throwable) {}
+    public function addThrowableInLog(Throwable $throwable) {
+        report($throwable) ;
     }
 
     /**
@@ -84,7 +82,7 @@ trait TryMethod {
      * @return bool
      */
     protected function isKnownException(Throwable $throwable) {
-        return $throwable instanceof MyException ;
+        return $throwable instanceof KnownException ;
     }
 
     /**
