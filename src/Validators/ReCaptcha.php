@@ -5,7 +5,6 @@ namespace Pythagus\LaravelAbstractBasis\Validators;
 use Exception;
 use Throwable;
 use anlutro\cURL\cURL;
-use Pythagus\LaravelAbstractBasis\Traits\ExternalRequest;
 
 /**
  * Class ReCaptcha
@@ -15,15 +14,13 @@ use Pythagus\LaravelAbstractBasis\Traits\ExternalRequest;
  */
 class ReCaptcha {
 
-	use ExternalRequest ;
-
 	/**
 	 * @param $attribute
 	 * @param $value
 	 * @param $parameters
 	 * @param $validator
 	 * @return bool
-     */
+	 */
 	public function validate($attribute, $value, $parameters, $validator) {
 		$url = config('app.recaptcha.url') ;
 		if(empty($url)) {
