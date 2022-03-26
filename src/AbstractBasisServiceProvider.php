@@ -20,52 +20,52 @@ use Pythagus\LaravelAbstractBasis\Commands\GenerateRepositoryCommand;
  */
 class AbstractBasisServiceProvider extends ServiceProvider {
 
-	/**
-	 * @var array
-	 */
-	protected $commands = [
-		GenerateRepositoryCommand::class,
-		GenerateViewCommand::class,
-		ModuleLinkCommand::class,
-	] ;
+    /**
+     * @var array
+     */
+    protected $commands = [
+        GenerateRepositoryCommand::class,
+        GenerateViewCommand::class,
+        ModuleLinkCommand::class,
+    ] ;
 
-	/**
+    /**
      * Bootstrap any application services.
      *
      * @return void
      */
-	public function boot() {
-		// Boot the view composers.
-		View::composer('*', UserComposer::class) ;
+    public function boot() {
+        // Boot the view composers.
+        View::composer('*', UserComposer::class) ;
 
-		// Boot the validators.
-		Validator::extend(
-			'recaptcha', 'Pythagus\\LaravelAbstractBasis\\Validators\\ReCaptcha@validate'
-		) ;
+        // Boot the validators.
+        Validator::extend(
+            'recaptcha', 'Pythagus\\LaravelAbstractBasis\\Validators\\ReCaptcha@validate'
+        ) ;
 
-		// Publish the views.
-		$this->loadViewsFrom(__DIR__ . '/views', 'abstract-basis') ;
+        // Publish the views.
+        $this->loadViewsFrom(__DIR__ . '/views', 'abstract-basis') ;
         $this->publishes([
             __DIR__ . '/views' => base_path('resources/views/vendor/abstract-basis')
         ]) ;
-	}
+    }
 
-	/**
-	 * Register any application services.
-	 *
-	 * @return void
-	 */
-	public function register() {
-		$this->commands($this->commands) ;
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register() {
+        $this->commands($this->commands) ;
 
-		$this->publishes(
-	        $this->getStubs(['migration.create', 'seeder']), 'abstract-basis-stubs'
+        $this->publishes(
+            $this->getStubs(['migration.create', 'seeder']), 'abstract-basis-stubs'
         ) ;
-	}
+    }
 
-	/**
-	 * Get the stubs path.
-	 * 
+    /**
+     * Get the stubs path.
+     * 
      * @param array $names
      * @return array
      */

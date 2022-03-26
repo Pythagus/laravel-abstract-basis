@@ -18,84 +18,84 @@ use Illuminate\Database\Migrations\Migration as BaseMigration;
  */
 abstract class Migration extends BaseMigration {
 
-	/**
-	 * Name of the table
-	 *
-	 * @var string
-	 */
-	protected $table ;
+    /**
+     * Name of the table
+     *
+     * @var string
+     */
+    protected $table ;
 
-	/**
-	 * Class name of the migration.
-	 *
-	 * @var string
-	 */
-	protected $class ;
+    /**
+     * Class name of the migration.
+     *
+     * @var string
+     */
+    protected $class ;
 
-	/**
-	 * Structure of the table.
-	 *
-	 * @param Blueprint $table
-	 * @return void
-	 */
-	abstract public function structure(Blueprint $table) ;
+    /**
+     * Structure of the table.
+     *
+     * @param Blueprint $table
+     * @return void
+     */
+    abstract public function structure(Blueprint $table) ;
 
-	/**
-	 * Get the table name from another way, like
-	 * from the config folder.
-	 *
-	 * @return string|null
-	 */
-	protected function tableName() {
-		return null ;
-	}
+    /**
+     * Get the table name from another way, like
+     * from the config folder.
+     *
+     * @return string|null
+     */
+    protected function tableName() {
+        return null ;
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	public function down() {
-		Schema::dropIfExists($this->getTable()) ;
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     * @throws Exception
+     */
+    public function down() {
+        Schema::dropIfExists($this->getTable()) ;
+    }
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	public function up() {
-		$table = $this->getTable() ;
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     * @throws Exception
+     */
+    public function up() {
+        $table = $this->getTable() ;
 
-		if(! Schema::hasTable($table)) {
-			Schema::create($table, function(Blueprint $t) {
-				$this->structure($t) ;
-			}) ;
-		}
-	}
+        if(! Schema::hasTable($table)) {
+            Schema::create($table, function(Blueprint $t) {
+                $this->structure($t) ;
+            }) ;
+        }
+    }
 
-	/**
-	 * Get the table name.
-	 *
-	 * @return string
-	 * @throws Exception
-	 */
-	protected function getTable() {
-		if(! empty($this->class)) {
-			return app($this->class)->getTable() ;
-		}
+    /**
+     * Get the table name.
+     *
+     * @return string
+     * @throws Exception
+     */
+    protected function getTable() {
+        if(! empty($this->class)) {
+            return app($this->class)->getTable() ;
+        }
 
-		if(! empty($this->table)) {
-			return $this->table ;
-		}
+        if(! empty($this->table)) {
+            return $this->table ;
+        }
 
-		$name = $this->tableName() ;
-		if(! empty($name)) {
-			return $name ;
-		}
+        $name = $this->tableName() ;
+        if(! empty($name)) {
+            return $name ;
+        }
 
-		throw new Exception("Undefined class in " . static::class . " migration.") ;
-	}
+        throw new Exception("Undefined class in " . static::class . " migration.") ;
+    }
 }

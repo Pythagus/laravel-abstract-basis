@@ -12,14 +12,14 @@ use Illuminate\View\View;
  */
 class UserComposer {
 
-	/**
-	 * Bind data to the view.
-	 *
-	 * @param  View  $view
-	 * @return void
-	 */
-	public function compose(View $view) {
-		$view->with('user', auth()->user()) ;
-		$view->with('userFlashErrors', session('flash_notification', collect())) ;
-	}
+    /**
+     * Bind data to the view.
+     *
+     * @param  View  $view
+     * @return void
+     */
+    public function compose(View $view) {
+        $view->with('user', auth()->user()) ;
+        $view->with('userFlashErrors', session('flash_notification', collect())) ;
+    }
 }

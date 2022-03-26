@@ -26,89 +26,89 @@ class ModuleLinkCommand extends Command {
      */
     protected $description = 'Make the modules symbolic links.' ;
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return int
-	 */
-	public function handle() {
-		$deleted = 0 ;
-		$created = 0 ;
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle() {
+        $deleted = 0 ;
+        $created = 0 ;
 
-		foreach($this->getModules() as $module => $path) {
-			if($this->linkExist($module)) {
-				unlink($this->publicPath($module)) ;
-				$deleted++ ;
-			}
+        foreach($this->getModules() as $module => $path) {
+            if($this->linkExist($module)) {
+                unlink($this->publicPath($module)) ;
+                $deleted++ ;
+            }
 
-			if(is_dir($this->vendorPath($path))) {
-				symlink(
-					$this->vendorPath($path), $this->publicPath($module)
-				) ;
+            if(is_dir($this->vendorPath($path))) {
+                symlink(
+                    $this->vendorPath($path), $this->publicPath($module)
+                ) ;
 
-				$created++ ;
-			} else {
-				$this->alert("Module $module not found") ;
-			}
-		}
+                $created++ ;
+            } else {
+                $this->alert("Module $module not found") ;
+            }
+        }
 
-		$this->makeComment($deleted, 'deleted') ;
-		$this->makeComment($created, 'created') ;
+        $this->makeComment($deleted, 'deleted') ;
+        $this->makeComment($created, 'created') ;
 
-		return self::SUCCESS ;
-	}
+        return self::SUCCESS ;
+    }
 
-	/**
-	 * Get the modules.
-	 *
-	 * @return array
-	 */
-	protected function getModules() {
-		return config('app.modules', []) ;
-	}
+    /**
+     * Get the modules.
+     *
+     * @return array
+     */
+    protected function getModules() {
+        return config('app.modules', []) ;
+    }
 
-	/**
-	 * Make a comment to the output.
-	 *
-	 * @param int $value
-	 * @param string $method
-	 */
-	private function makeComment(int $value, string $method) {
-		$this->comment(
-			$value . ' file' . ($value > 1 ? 's' : '') . ' ' . $method
-		) ;
-	}
+    /**
+     * Make a comment to the output.
+     *
+     * @param int $value
+     * @param string $method
+     */
+    private function makeComment(int $value, string $method) {
+        $this->comment(
+            $value . ' file' . ($value > 1 ? 's' : '') . ' ' . $method
+        ) ;
+    }
 
-	/**
-	 * Determine whether the given link already
-	 * exists.
-	 *
-	 * @param string $module
-	 * @return bool
-	 */
-	private function linkExist(string $module) {
-		return is_link(
-			$this->publicPath($module)
-		) ;
-	}
+    /**
+     * Determine whether the given link already
+     * exists.
+     *
+     * @param string $module
+     * @return bool
+     */
+    private function linkExist(string $module) {
+        return is_link(
+            $this->publicPath($module)
+        ) ;
+    }
 
-	/**
-	 * Get the public path of the given module.
-	 *
-	 * @param string $module
-	 * @return string
-	 */
-	private function publicPath(string $module) {
-		return public_path($module) ;
-	}
+    /**
+     * Get the public path of the given module.
+     *
+     * @param string $module
+     * @return string
+     */
+    private function publicPath(string $module) {
+        return public_path($module) ;
+    }
 
-	/**
-	 * Get the vendor path of the given module.
-	 *
-	 * @param string $module
-	 * @return string
-	 */
-	private function vendorPath(string $module) {
-		return base_path('vendor/'.$module) ;
-	}
+    /**
+     * Get the vendor path of the given module.
+     *
+     * @param string $module
+     * @return string
+     */
+    private function vendorPath(string $module) {
+        return base_path('vendor/'.$module) ;
+    }
 }

@@ -15,6 +15,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
  */
 abstract class AbstractMail extends Mailable implements ShouldQueue {
 
-	use Queueable, SerializesModels ;
+    use Queueable, SerializesModels ;
 
 }
