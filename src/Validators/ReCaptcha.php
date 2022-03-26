@@ -4,6 +4,7 @@ namespace Pythagus\LaravelAbstractBasis\Validators;
 
 use Exception;
 use Throwable;
+use anlutro\cURL\cURL;
 use Pythagus\LaravelAbstractBasis\Traits\ExternalRequest;
 
 /**
@@ -35,13 +36,14 @@ class ReCaptcha {
 		}
 
 		try {
-			$response = $this->externalRequest($url, [
+			$response = (new cURL())->post($url, [
 				'secret'   => $secret,
 				'response' => $value
 			]) ;
+			$body = json_decode($response->getBody(), true) ;
 
-			return boolval($response->success) ;
-		} catch(Throwable $e) {
+			return boolval($body['success'] ?? false) ;
+		} catch(Throwable $ignored) {
 			return false ;
 		}
 	}

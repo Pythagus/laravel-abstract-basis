@@ -11,8 +11,7 @@
     }],
     "require": {
         "php": ">=7.0",
-        "ext-curl": "*",
-        "ext-json": "*",
+		"anlutro/curl": "^1.5",
         "htmlmin/htmlmin": "^9.0",
         "laravel/framework": ">=5.3",
         "laracasts/flash": "^3.0"
