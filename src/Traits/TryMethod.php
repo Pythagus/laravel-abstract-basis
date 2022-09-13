@@ -3,8 +3,6 @@
 namespace Pythagus\LaravelAbstractBasis\Traits;
 
 use Throwable;
-use Illuminate\Http\JsonResponse;
-use Pythagus\LaravelAbstractBasis\Contracts\KnownException;
 
 /**
  * Trait TryMethod
@@ -21,21 +19,22 @@ trait TryMethod {
      *
      * @param callable $inner
      * @param callable|null $out
+     * @param bool $json
      * @return mixed
      */
-    protected function try(callable $inner, callable $out = null) {
+    protected function try(callable $inner, callable $out = null, bool $json = false) {
         try {
-            return $inner() ;
+            $response = $inner() ;
+
+            return $json ? response()->json($response) : $response ;
         } catch(Throwable $throwable) {
-            if(! $this->isKnownException($throwable)) {
-                $this->addThrowableInLog($throwable) ;
-            }
+            $this->addThrowableInLog($throwable) ;
 
             if(! is_null($out)) {
                 return $out($throwable) ;
             }
 
-            return $this->backError($this->getThrowableMessage($throwable)) ;
+            return $this->redirectUserAfterException($throwable, $json) ;
         }
     }
 
@@ -43,29 +42,33 @@ trait TryMethod {
      * Try an Ajax call.
      * 
      * @param callable $inner
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     protected function ajax(callable $inner) {
-        return $this->try(function() use ($inner) {
-            return response()->json($inner()) ;
-        }, function(Throwable $throwable) {
-            $text = $this->getThrowableMessage($throwable);
-
-            return response()->json(compact('text'), 500) ;
-        }) ;
+        return $this->try($inner, null, true) ;
     }
 
     /**
-     * Get the message of the throwable regarding its
-     * instance.
-     *
+     * Redirect the user after encountering a
+     * throwable.
+     * 
      * @param Throwable $throwable
-     * @return string
+     * @param bool $json
+     * @return \Illuminate\Http\JsonResponse
      */
-    private function getThrowableMessage(Throwable $throwable) {
-        return $this->isKnownException($throwable)
-            ? $throwable->getMessage()
-            : $this->weirdExceptionMessage($throwable) ;
+    protected function redirectUserAfterException(Throwable $throwable, bool $json) {
+        if(app()->environment('local')) {
+            throw $throwable ;
+        }
+
+        if($json) {
+            return response()->json([
+                'text' => $throwable->getMessage(),
+                'code' => $throwable->getCode(),
+            ], 500) ;
+        }
+
+        return $this->backError($throwable->getMessage())->withInput() ;
     }
 
     /**
@@ -75,21 +78,5 @@ trait TryMethod {
      */
     public function addThrowableInLog(Throwable $throwable) {
         report($throwable) ;
-    }
-
-    /**
-     * @param Throwable $throwable
-     * @return bool
-     */
-    protected function isKnownException(Throwable $throwable) {
-        return $throwable instanceof KnownException ;
-    }
-
-    /**
-     * @param Throwable $throwable
-     * @return string
-     */
-    protected function weirdExceptionMessage(Throwable $throwable) {
-        return "An error occurred" ;
     }
 }

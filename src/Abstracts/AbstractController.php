@@ -39,10 +39,7 @@ abstract class AbstractController extends Controller {
      * @return User
      */
     public function user() {
-        /** @var User $user */
-        $user = auth()->user() ;
-
-        return $user ;
+        return auth()->user() ;
     }
 
     /**
