@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use Pythagus\LaravelAbstractBasis\Commands\ModuleLinkCommand;
-use Pythagus\LaravelAbstractBasis\View\Composers\UserComposer;
 
 /**
  * Class QuickMigrationServiceProvider
@@ -23,7 +21,7 @@ class AbstractBasisServiceProvider extends ServiceProvider {
      * @var array
      */
     protected $commands = [
-        ModuleLinkCommand::class,
+        \Pythagus\LaravelAbstractBasis\Commands\ModuleLinkCommand::class,
     ] ;
 
     /**
@@ -33,7 +31,7 @@ class AbstractBasisServiceProvider extends ServiceProvider {
      */
     public function boot() {
         // Boot the view composers.
-        View::composer('*', UserComposer::class) ;
+        View::composer('*', \Pythagus\LaravelAbstractBasis\View\Composers\UserComposer::class) ;
 
         // Registering the asset alias.
         AliasLoader::getInstance()->alias('Asset', 'Pythagus\LaravelAbstractBasis\View\Assets\Facade') ;

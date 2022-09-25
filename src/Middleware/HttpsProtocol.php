@@ -3,7 +3,6 @@
 namespace Pythagus\LaravelAbstractBasis\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 
 /**
  * Class HttpsProtocol
@@ -16,7 +15,7 @@ class HttpsProtocol {
     /**
      * Handle an incoming request.
      *
-     * @param  Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param  Closure  $next
      * @return mixed
      */

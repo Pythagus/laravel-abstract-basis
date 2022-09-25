@@ -2,8 +2,6 @@
 
 namespace Pythagus\LaravelAbstractBasis;
 
-use Illuminate\Http\RedirectResponse;
-
 /**
  * Class Redirection
  * @package Pythagus\LaravelAbstractBasis
@@ -30,7 +28,7 @@ class Redirection {
 
     /**
      * @param string|null $text
-     * @return Redirection
+     * @return static
      */
     public static function make(string $text = null) {
         return new Redirection($text) ;
@@ -40,7 +38,7 @@ class Redirection {
      * Set the type of the alert.
      *
      * @param string $type
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     private function setType(string $type) {
         if(! is_null($this->text)) {
@@ -53,7 +51,7 @@ class Redirection {
     /**
      * Set the alert as success.
      *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function success() {
         return $this->setType('success') ;
@@ -62,7 +60,7 @@ class Redirection {
     /**
      * Set the alert as error.
      *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function error() {
         return $this->setType('error') ;
@@ -71,7 +69,7 @@ class Redirection {
     /**
      * Set the alert as warning.
      *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function warning() {
         return $this->setType('warning') ;
