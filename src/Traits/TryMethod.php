@@ -94,7 +94,7 @@ trait TryMethod {
      * @return bool
      */
     protected function isKnownException(Throwable $throwable) {
-        return $throwable instanceof \Pythagus\LaravelAbstractBasis\Contracts\KnownException ;
+        return $throwable instanceof \Pythagus\LaravelAbstractBasis\Exceptions\KnownException ;
     }
 
     /**
