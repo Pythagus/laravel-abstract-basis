@@ -2,8 +2,6 @@
 
 namespace Pythagus\LaravelAbstractBasis\Validators;
 
-use Exception;
-use Throwable;
 use anlutro\cURL\cURL;
 
 /**
@@ -24,12 +22,12 @@ class ReCaptcha {
     public function validate($attribute, $value, $parameters, $validator) {
         $url = config('app.recaptcha.url') ;
         if(empty($url)) {
-            throw new Exception("Null ReCaptcha URL") ;
+            throw new \Exception("Null ReCaptcha URL") ;
         }
 
         $secret = config('app.recaptcha.secret') ;
         if(empty($secret)) {
-            throw new Exception("Null ReCaptcha secret") ;
+            throw new \Exception("Null ReCaptcha secret") ;
         }
 
         try {
@@ -40,7 +38,7 @@ class ReCaptcha {
             $body = json_decode($response->getBody(), true) ;
 
             return boolval($body['success'] ?? false) ;
-        } catch(Throwable $ignored) {
+        } catch(\Throwable $ignored) {
             return false ;
         }
     }

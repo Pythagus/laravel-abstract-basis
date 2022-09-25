@@ -28,7 +28,10 @@
         "laravel": {
             "providers": [
                 "Pythagus\\LaravelAbstractBasis\\AbstractBasisServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Asset": "Pythagus\\LaravelAbstractBasis\\View\\Assets\\Facade"
+            }
         }
     }
 }

@@ -3,12 +3,11 @@
 namespace Pythagus\LaravelAbstractBasis;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Pythagus\LaravelAbstractBasis\Commands\ModuleLinkCommand;
 use Pythagus\LaravelAbstractBasis\View\Composers\UserComposer;
-use Pythagus\LaravelAbstractBasis\Commands\GenerateViewCommand;
-use Pythagus\LaravelAbstractBasis\Commands\GenerateRepositoryCommand;
 
 /**
  * Class QuickMigrationServiceProvider
@@ -24,8 +23,6 @@ class AbstractBasisServiceProvider extends ServiceProvider {
      * @var array
      */
     protected $commands = [
-        GenerateRepositoryCommand::class,
-        GenerateViewCommand::class,
         ModuleLinkCommand::class,
     ] ;
 
@@ -37,6 +34,9 @@ class AbstractBasisServiceProvider extends ServiceProvider {
     public function boot() {
         // Boot the view composers.
         View::composer('*', UserComposer::class) ;
+
+        // Registering the asset alias.
+        AliasLoader::getInstance()->alias('Asset', 'Pythagus\LaravelAbstractBasis\View\Assets\Facade') ;
 
         // Boot the validators.
         Validator::extend(

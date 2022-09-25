@@ -28,7 +28,7 @@ if(! function_exists('last_modified_time')) {
         try {
             $absolute = $_SERVER['DOCUMENT_ROOT'] . parse_url($url, PHP_URL_PATH) ;
             $version  = File::lastModified($absolute) ;
-        } catch(Throwable $ignored) {}
+        } catch(\Throwable $ignored) {}
 
         return $version ;
     }
