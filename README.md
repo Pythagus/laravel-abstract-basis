@@ -18,32 +18,6 @@ composer require pythagus/laravel-abstract-basis
 ## Usage
 In this section, we will see how to use the current package features.
 
-##### AbstractPolicy
-The ```AbstrastPolicy``` manages the ```before()``` method. By default, the system is **disabled**.
-To activate the system, you need to set in your ```AppServiceProvider```in the ```boot()``` method:
-```php
-AbstractPolicy::setEnable(true) ;
-AbstractPolicy::setCallback(function($user) {
-    /** @var User $user */
-    return $user->isSuperUser() ;
-});
-```
-*Warning note:* the ```$user``` parameter can be null.
-
-The **forced** attribute allows you to disable the system in specific policies, like:
-```php
-class YourPolicy extends AbstractPolicy {
-    protected $forced = true ;
-}
-```
-And then, the ```before()``` method will be useless for this policy methods. 
-
-If the system is enabled and you defined a callback, then the callback will be executed. If the callback returns **True**, then the user is allowed ; otherwise, the ```before()``` method returns **null**, and your policy methods are called. 
-
-##### Other abstracts
-The other abstract objects are only a merge of the repetitive things in the generated Laravel files: ```AbstractController```, ```AbstractEvent```, ```AbstractListener```, ```AbstractRepository```, ```AbstractMail```, ```AbstractNotification```.
-Please, check the files to know what they implement. 
-
 ##### Configurations
 You can configure the ```php artisan module:link``` by defining in your ```config/app.php``` file:
 ```php
