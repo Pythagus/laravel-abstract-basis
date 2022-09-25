@@ -4,7 +4,6 @@ namespace Pythagus\LaravelAbstractBasis\Abstracts;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 /**
@@ -13,7 +12,7 @@ use Illuminate\Notifications\Messages\MailMessage;
  *
  * @author: Damien MOLINA
  */
-abstract class AbstractNotification extends Notification implements ShouldQueue {
+abstract class AbstractNotification extends Notification {
 
     use Queueable ;
 
@@ -45,5 +44,4 @@ abstract class AbstractNotification extends Notification implements ShouldQueue 
     public function make() {
         return new MailMessage() ;
     }
-
 }
