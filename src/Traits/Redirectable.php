@@ -20,7 +20,7 @@ trait Redirectable {
      * @return RedirectResponse
      */
     protected function backSuccess(string $msg = null) {
-        return $this->redirectSuccess($msg)->back() ;
+        return $this->redirectSuccess($msg)->back()->withInput() ;
     }
 
     /**
@@ -30,7 +30,7 @@ trait Redirectable {
      * @return RedirectResponse
      */
     protected function backError(string $msg = null) {
-        return $this->redirectError($msg)->back() ;
+        return $this->redirectError($msg)->back()->withInput() ;
     }
 
     /**
@@ -40,7 +40,7 @@ trait Redirectable {
      * @return RedirectResponse
      */
     protected function backWarning(string $msg = null) {
-        return $this->redirectWarning($msg)->back() ;
+        return $this->redirectWarning($msg)->back()->withInput() ;
     }
 
     /**
