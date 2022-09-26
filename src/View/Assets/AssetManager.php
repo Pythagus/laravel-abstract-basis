@@ -43,6 +43,22 @@ class AssetManager extends Facade {
     }
 
     /**
+     * Correctly format the given path.
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function preparePath(string $path): string {
+        if(str_starts_with($path, 'http')) {
+            return $path ;
+        }
+
+        $path = str_starts_with($path, '/') ? $path : '/' . $path ;
+
+        return asset($path) . "?version=" . last_modified_time($path) ;
+    }
+
+    /**
      * Prepend the content.
      *
      * @return void
@@ -70,11 +86,7 @@ class AssetManager extends Facade {
     public function js(string $path, bool $module = false): static {
         $this->content = '<script type="' 
             . ($module ? 'module' : "text/javascript")
-            . '" src="'
-            . asset($path)
-            . "?version="
-            . last_modified_time($path)
-            . '"></script>' ;
+            . '" src="' . $this->preparePath($path) . '"></script>' ;
 
         return $this ;
     }
@@ -86,11 +98,7 @@ class AssetManager extends Facade {
      * @return static
      */
     public function css(string $path): static {
-        $this->content = '<link rel="stylesheet" href="'
-            . asset($path) 
-            . "?version="
-            . last_modified_time($path)
-            . '">' ;
+        $this->content = '<link rel="stylesheet" href="' . $this->preparePath($path) . '">' ;
 
         return $this ;
     }

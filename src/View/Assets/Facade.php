@@ -29,7 +29,7 @@ class Facade extends LaravelFacade {
      * @return AssetManager
      */
     public static function js(string $path, bool $module = false) {
-        return static::manager('scripts')->js('/' . $path, $module) ;
+        return static::manager('scripts')->js($path, $module) ;
     }
 
     /**
@@ -39,6 +39,6 @@ class Facade extends LaravelFacade {
      * @return AssetManager
      */
     public static function css(string $path) {
-        return static::manager('styles')->css('/' . $path) ;
+        return static::manager('styles')->css($path) ;
     }
 }
